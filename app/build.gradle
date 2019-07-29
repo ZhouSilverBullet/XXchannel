@@ -1,0 +1,76 @@
+ext.mainApp = true //标记为主app module
+apply from: rootProject.file('cc-settings-2.gradle')
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+
+    defaultConfig {
+        applicationId rootProject.applicationId
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        versionCode rootProject.versionCode
+        versionName rootProject.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            res.srcDirs = [
+                    'src/main/res/layout/dialog',
+                    'src/main/res/layout',
+                    'src/main/res'
+            ]
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.appcompat:appcompat:$rootProject.appcompat"
+    implementation "androidx.core:core-ktx:$rootProject.corektx"
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintlayout"
+    implementation "com.google.android.material:material:$rootProject.material"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutines"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutines"
+    implementation "com.github.CymChad:BaseRecyclerViewAdapterHelper:$rootProject.BaseRecyclerViewAdapterHelper"
+
+    implementation "com.scwang.smartrefresh:SmartRefreshLayout:$rootProject.SmartRefreshLayout"
+    implementation "com.scwang.smartrefresh:SmartRefreshHeader:$rootProject.SmartRefreshLayout"
+    implementation "androidx.legacy:legacy-support-v4:$rootProject.legacy"
+
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofit"
+//    implementation "com.squareup.retrofit2:adapter-rxjava2:$project.retrofit"
+
+    implementation "com.bennyhuo.kotlin:coroutines-android-mainscope:$rootProject.mainscope"
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycle"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycle"
+
+    implementation "com.github.bumptech.glide:glide:$rootProject.glide"
+
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+
+    implementation project(path: ':base')
+    implementation project(path: ':common')
+
+    //splash直接依赖上
+//    implementation project(path: ':splash')
+
+
+}
