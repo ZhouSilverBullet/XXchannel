@@ -1,4 +1,4 @@
-package com.sdxxtop.common.model.api
+package com.sdxxtop.network.api
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

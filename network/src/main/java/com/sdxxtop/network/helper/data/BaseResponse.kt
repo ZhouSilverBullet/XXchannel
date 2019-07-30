@@ -1,4 +1,4 @@
-package com.sdxxtop.common.model.helper.data
+package com.sdxxtop.network.helper.data
 
 /**
  * Email: zhousaito@163.com

@@ -10,17 +10,17 @@ import java.lang.ref.WeakReference
  * Description:
  */
 object CommonSession {
-    lateinit var contextDef: WeakReference<Context>
-    var version: Int = 0
+    private lateinit var contextDef: WeakReference<Context>
 
-
-    fun initCommon(context: Context, version: Int) {
+    fun initCommon(context: Context) {
         this@CommonSession.contextDef = WeakReference(context)
-        this@CommonSession.version = version
     }
 
     @JvmStatic
     fun getContext(): Context {
+        if (contextDef.get() == null) {
+            throw IllegalAccessException("CommonSession需要被初始化，用于获取资源等...")
+        }
         return contextDef.get()!!
     }
 }

@@ -1,4 +1,4 @@
-package com.sdxxtop.common.model.helper;
+package com.sdxxtop.network.helper;
 
 
 import android.util.Base64;

@@ -1,4 +1,4 @@
-package com.sdxxtop.common.utils
+package com.sdxxtop.network.utils
 
 import android.content.Context
 import android.net.ConnectivityManager

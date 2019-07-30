@@ -2,7 +2,7 @@ package com.sdxxtop.xxchannel
 
 import com.orhanobut.logger.Logger
 import com.sdxxtop.base.BaseViewModel
-import com.sdxxtop.common.model.helper.Params
+import com.sdxxtop.network.helper.Params
 import com.sdxxtop.xxchannel.model.api.RetrofitClient
 import es.dmoral.toasty.Toasty
 

@@ -7,7 +7,7 @@ import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.util.Log
 import android.widget.Toast
-import com.sdxxtop.common.utils.NetworkUtils
+import com.sdxxtop.common.utils.CommonNetworkUtils
 
 /**
  * Email: sdxxtop@163.com
@@ -44,7 +44,7 @@ class ConnectivityReceiver : BroadcastReceiver() {
                     Toast.makeText(context, "WIFI网络", Toast.LENGTH_LONG).show()
                 }
                 else -> {
-                    if (!NetworkUtils.isNetworkAvailable(context)) {
+                    if (!CommonNetworkUtils.isNetworkAvailable(context)) {
                         Toast.makeText(context, "当前网络不稳定", Toast.LENGTH_LONG).show()
                     }
                 }

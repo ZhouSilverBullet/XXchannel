@@ -1,7 +1,6 @@
-package com.sdxxtop.common.model.helper;
+package com.sdxxtop.network.helper;
 
-import com.sdxxtop.common.CommonSession;
-import com.sdxxtop.common.utils.PictureUtil;
+import com.sdxxtop.network.utils.PictureUtil;
 
 import java.io.File;
 import java.util.HashMap;
@@ -77,7 +76,7 @@ public class ImageParams extends Params {
     public void addImagePathList(String imgPar, List<File> pathList) {
         for (int i = 0; i < pathList.size(); i++) {
 //            addImagePath(imgPar, pathList.get(i));
-            addCompressImagePath(imgPar, pathList.get(i), CommonSession.getContext().getCacheDir() + "/img" + i + ".png", 80);
+            addCompressImagePath(imgPar, pathList.get(i), HttpConstantValue.PATH_IMG + i + ".png", 80);
         }
     }
 

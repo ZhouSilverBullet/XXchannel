@@ -3,13 +3,10 @@ package com.sdxxtop.base
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sdxxtop.common.model.helper.data.BaseResponse
-import com.sdxxtop.common.model.load.ILoadData
-import com.sdxxtop.common.model.load.LoadDataImpl
-import com.sdxxtop.common.utils.NetworkUtils
+import com.sdxxtop.network.helper.data.BaseResponse
+import com.sdxxtop.network.load.ILoadData
+import com.sdxxtop.network.load.LoadDataImpl
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
-import java.net.UnknownHostException
 
 /**
  * Email: sdxxtop@163.com

@@ -1,4 +1,4 @@
-package com.sdxxtop.common.utils;
+package com.sdxxtop.network.utils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -6,7 +6,8 @@ import android.os.Build;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
-import com.sdxxtop.common.model.helper.HttpConstantValue;
+import com.sdxxtop.network.helper.HttpConstantValue;
+
 
 public class DeviceUtil {
     @SuppressLint("MissingPermission")

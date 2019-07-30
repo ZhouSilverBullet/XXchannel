@@ -1,6 +1,6 @@
-package com.sdxxtop.common.model.helper;
+package com.sdxxtop.network.helper;
 
-import com.sdxxtop.common.CommonSession;
+import com.sdxxtop.network.NetworkSession;
 
 import java.io.File;
 
@@ -12,11 +12,9 @@ public interface HttpConstantValue {
     String APP_KEY = "70R84GQ2G90577ED60C4DC56A9EF3DB5";
 
 
-
-
-    String PATH_DATA = CommonSession.getContext().getCacheDir().getAbsolutePath() + File.separator + "data";
-    String PATH_CACHE = CommonSession.getContext().getCacheDir().getAbsolutePath() + File.separator + "NetCache";
-    String PATH_IMG = CommonSession.getContext().getCacheDir().getAbsolutePath() + File.separator + "img";
+    String PATH_DATA = NetworkSession.getContext().getCacheDir().getAbsolutePath() + File.separator + "data";
+    String PATH_CACHE = NetworkSession.getContext().getCacheDir().getAbsolutePath() + File.separator + "NetCache";
+    String PATH_IMG = NetworkSession.getContext().getCacheDir().getAbsolutePath() + File.separator + "img";
 
     public static String COMPANY_JIN_WEIDU = "company_jin_weidu";
 

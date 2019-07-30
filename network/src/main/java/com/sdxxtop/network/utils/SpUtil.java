@@ -1,10 +1,9 @@
-package com.sdxxtop.common.utils;
+package com.sdxxtop.network.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-
-import com.sdxxtop.common.CommonSession;
+import com.sdxxtop.network.NetworkSession;
 
 import java.util.Map;
 
@@ -16,7 +15,7 @@ public class SpUtil {
     }
 
     private static SharedPreferences getSp() {
-        return CommonSession.getContext().getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
+        return NetworkSession.getContext().getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
     }
 
 

@@ -1,12 +1,12 @@
-package com.sdxxtop.common.model.helper;
+package com.sdxxtop.network.helper;
 
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.sdxxtop.common.CommonSession;
-import com.sdxxtop.common.utils.DeviceUtil;
-import com.sdxxtop.common.utils.SpUtil;
-import com.sdxxtop.common.utils.StringUtil;
+import com.sdxxtop.network.NetworkSession;
+import com.sdxxtop.network.utils.DeviceUtil;
+import com.sdxxtop.network.utils.SpUtil;
+import com.sdxxtop.network.utils.StringUtil;
 
 import java.util.HashMap;
 
@@ -20,7 +20,7 @@ public class Params {
 
     public Params() {
         map = new HashMap<>();
-        context = CommonSession.getContext();
+        context = NetworkSession.getContext();
         defaultValue();
     }
 
@@ -65,7 +65,7 @@ public class Params {
     }
 
     public String getData() {
-        return NetUtil.getBase64Data(map, CommonSession.INSTANCE.getVersion());
+        return NetUtil.getBase64Data(map, NetworkSession.INSTANCE.getVersion());
     }
 
     public void putDeviceNo() {

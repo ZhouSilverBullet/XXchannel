@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import com.sdxxtop.base.BaseApplication
 import com.sdxxtop.common.CommonSession
+import com.sdxxtop.network.NetworkSession
 import kotlin.properties.Delegates
 
 /**
@@ -24,7 +25,10 @@ class App : BaseApplication() {
         super.onCreate()
         INSTANCE = this
         //要把common层进行初始化
-        CommonSession.initCommon(this, BuildConfig.VERSION_CODE)
+        CommonSession.initCommon(this)
+        //初始化network模块
+        NetworkSession.initNetwork(this, BuildConfig.VERSION_CODE)
+
         Log.i(TAG, "--------------调取-------------->")
     }
 }

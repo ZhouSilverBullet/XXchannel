@@ -1,7 +1,7 @@
-package com.sdxxtop.common.model.load
+package com.sdxxtop.network.load
 
 import android.content.Context
-import com.sdxxtop.common.model.helper.data.BaseResponse
+import com.sdxxtop.network.helper.data.BaseResponse
 import kotlinx.coroutines.CoroutineScope
 
 /**

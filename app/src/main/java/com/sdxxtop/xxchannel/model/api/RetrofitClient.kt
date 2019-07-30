@@ -1,6 +1,6 @@
 package com.sdxxtop.xxchannel.model.api
 
-import com.sdxxtop.common.model.api.BaseRetrofitClient
+import com.sdxxtop.network.api.BaseRetrofitClient
 import okhttp3.OkHttpClient
 
 /**
@@ -9,7 +9,7 @@ import okhttp3.OkHttpClient
  * Version: 1.0
  * Description:
  */
-object RetrofitClient :BaseRetrofitClient() {
+object RetrofitClient : BaseRetrofitClient() {
     val apiService by lazy {
         getService(ApiService::class.java, ApiService.BASE_URL)
     }
