@@ -8,6 +8,7 @@ import android.net.ConnectivityManager
 import android.util.Log
 import android.widget.Toast
 import com.sdxxtop.common.utils.CommonNetworkUtils
+import com.sdxxtop.common.utils.UIUtils
 
 /**
  * Email: sdxxtop@163.com

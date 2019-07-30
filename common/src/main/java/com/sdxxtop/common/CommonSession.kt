@@ -11,9 +11,14 @@ import java.lang.ref.WeakReference
  */
 object CommonSession {
     private lateinit var contextDef: WeakReference<Context>
+    lateinit var AUTHORITY: String;
 
-    fun initCommon(context: Context) {
+    /**
+     * authority -> FileProvider 中的字符串
+     */
+    fun initCommon(context: Context, authority: String) {
         this@CommonSession.contextDef = WeakReference(context)
+        this@CommonSession.AUTHORITY = authority
     }
 
     @JvmStatic
@@ -23,4 +28,5 @@ object CommonSession {
         }
         return contextDef.get()!!
     }
+
 }

@@ -25,7 +25,7 @@ class App : BaseApplication() {
         super.onCreate()
         INSTANCE = this
         //要把common层进行初始化
-        CommonSession.initCommon(this)
+        CommonSession.initCommon(this, "$packageName.provider")
         //初始化network模块
         NetworkSession.initNetwork(this, BuildConfig.VERSION_CODE)
 

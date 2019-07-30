@@ -50,7 +50,11 @@ dependencies {
     api "com.github.GrenderG:Toasty:$rootProject.Toasty"
     api "com.orhanobut:logger:$rootProject.orhanobut_logger"
 
+    api project(path: ':picture_library')
+    implementation project(path: ':network')
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
 }

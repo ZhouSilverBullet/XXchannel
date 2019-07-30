@@ -1,1 +1,1 @@
-include ':app', ':base', ':common', ':network'
+include ':app', ':base', ':common', ':network', ':picture_library', ':ucrop', ':ui'
