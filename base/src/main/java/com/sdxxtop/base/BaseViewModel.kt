@@ -3,10 +3,12 @@ package com.sdxxtop.base
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sdxxtop.common.model.helper.data.BaseResponse
+import com.sdxxtop.common.model.load.ILoadData
+import com.sdxxtop.common.model.load.LoadDataImpl
 import com.sdxxtop.common.utils.NetworkUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import java.lang.Exception
 import java.net.UnknownHostException
 
 /**
@@ -17,24 +19,32 @@ import java.net.UnknownHostException
  */
 abstract class BaseViewModel : ViewModel() {
     val mThrowable = MutableLiveData<Throwable>()
+    //抽取了LoadData
+    private val loadData: ILoadData = LoadDataImpl(BaseApplication.INSTANCE, viewModelScope)
 
-    fun loadOnUI(block: suspend CoroutineScope.() -> Unit,
-                 catchBack: suspend CoroutineScope.(t: Throwable) -> Unit = {},
-                 finallyBack: suspend CoroutineScope.() -> Unit = {}
-    ) {
-        viewModelScope.launch {
-            try {
-                if (NetworkUtils.isNetworkAvailable(BaseApplication.INSTANCE)) {
-                    block()
-                } else {
-                    catchBack(UnknownHostException())
-                }
-            } catch (e: Exception) {
-                catchBack(e)
-            } finally {
-                finallyBack()
-            }
-        }
+
+    fun <T> loadCatchOnUI(block: suspend CoroutineScope.() -> BaseResponse<T>,
+                          successBlock: (T) -> Unit,
+                          failBlock: (code: Int, msg: String, t: Throwable) -> Unit,
+                          catchBack: suspend CoroutineScope.(t: Throwable) -> Unit = {},
+                          finallyBack: suspend CoroutineScope.() -> Unit = {}) {
+        loadData.loadCatchOnUI(block, successBlock, failBlock, catchBack, finallyBack)
     }
 
+
+    fun <T> loadOnUI(block: suspend CoroutineScope.() -> BaseResponse<T>,
+                     successBlock: (T) -> Unit,
+            //空实现带参方法
+                     failBlock: (code: Int, msg: String, t: Throwable) -> Unit = { code, msg, t -> },
+                     finallyBack: suspend CoroutineScope.() -> Unit = {}) {
+        loadData.loadOnUI(block, successBlock, failBlock, finallyBack)
+    }
+
+
+    fun <T> loadBaseOnUI(block: suspend CoroutineScope.() -> BaseResponse<T>,
+                         successBlock: (BaseResponse<T>) -> Unit,
+                         failBlock: (code: Int, msg: String, t: Throwable) -> Unit,
+                         finallyBack: suspend CoroutineScope.() -> Unit = {}) {
+        loadData.loadBaseOnUI(block, successBlock, failBlock, finallyBack)
+    }
 }

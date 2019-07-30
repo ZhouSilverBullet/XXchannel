@@ -1,8 +1,10 @@
 package com.sdxxtop.xxchannel
 
+import android.content.Context
 import android.util.Log
 import com.sdxxtop.base.BaseApplication
 import com.sdxxtop.common.CommonSession
+import kotlin.properties.Delegates
 
 /**
  * Email: zhousaito@163.com
@@ -11,9 +13,16 @@ import com.sdxxtop.common.CommonSession
  * Description:
  */
 class App : BaseApplication() {
+    companion object {
+        @JvmStatic
+        var INSTANCE: Context by Delegates.notNull()
+    }
+
+
     val TAG = "CCApp"
     override fun onCreate() {
         super.onCreate()
+        INSTANCE = this
         //要把common层进行初始化
         CommonSession.initCommon(this, BuildConfig.VERSION_CODE)
         Log.i(TAG, "--------------调取-------------->")
