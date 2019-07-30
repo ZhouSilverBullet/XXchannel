@@ -67,5 +67,6 @@ ext {
     leakcanary = "2.0-alpha-3"
     Pudding = "1.2.0"
     Toasty = "1.4.2"
+    orhanobut_logger = "2.2.0"
 
 }

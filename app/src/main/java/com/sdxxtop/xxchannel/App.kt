@@ -1,7 +1,8 @@
 package com.sdxxtop.xxchannel
 
-import android.app.Application
 import android.util.Log
+import com.sdxxtop.base.BaseApplication
+import com.sdxxtop.common.CommonSession
 
 /**
  * Email: zhousaito@163.com
@@ -9,10 +10,12 @@ import android.util.Log
  * Version: 1.0
  * Description:
  */
-class App : Application() {
+class App : BaseApplication() {
     val TAG = "CCApp"
     override fun onCreate() {
         super.onCreate()
+        //要把common层进行初始化
+        CommonSession.initCommon(this, BuildConfig.VERSION_CODE)
         Log.i(TAG, "--------------调取-------------->")
     }
 }

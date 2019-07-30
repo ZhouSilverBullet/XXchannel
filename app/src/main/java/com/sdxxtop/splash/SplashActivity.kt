@@ -1,10 +1,12 @@
 package com.sdxxtop.splash
 
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.WindowManager
+import com.sdxxtop.xxchannel.MainActivity
 import com.sdxxtop.xxchannel.R
 
 class SplashActivity : AppCompatActivity() {
@@ -25,7 +27,7 @@ class SplashActivity : AppCompatActivity() {
         }
 
         Handler().postDelayed({
-
-        },1000)
+            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+        }, 1000)
     }
 }

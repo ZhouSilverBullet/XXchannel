@@ -48,6 +48,7 @@ dependencies {
 
     api "com.github.o0o0oo00:Pudding:$rootProject.Pudding"
     api "com.github.GrenderG:Toasty:$rootProject.Toasty"
+    api "com.orhanobut:logger:$rootProject.orhanobut_logger"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
