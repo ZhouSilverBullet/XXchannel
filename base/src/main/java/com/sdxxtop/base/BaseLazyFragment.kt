@@ -42,14 +42,27 @@ abstract class BaseLazyFragment<DB : ViewDataBinding, VM : ViewModel> : Fragment
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         mBinding = DataBindingUtil.inflate<DB>(inflater, layoutId(), container, false)
+        mBinding.lifecycleOwner = this
         return mBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        bindVM()
+        mBinding.executePendingBindings()
+
         initView()
         initObserve()
+        initEvent()
         initData()
+    }
+
+    override fun bindVM() {
+
+    }
+
+    override fun initEvent() {
     }
 
     override fun initData() {
@@ -61,6 +74,11 @@ abstract class BaseLazyFragment<DB : ViewDataBinding, VM : ViewModel> : Fragment
             isLoad = true
             loadData()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mBinding.unbind()
     }
 
 }

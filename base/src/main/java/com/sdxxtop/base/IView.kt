@@ -19,6 +19,10 @@ interface IView {
      */
     fun initView()
 
+    /**
+     * 做一些事件初始化
+     */
+    fun initEvent()
 
     /**
      * 初始化数据，或者获取数据

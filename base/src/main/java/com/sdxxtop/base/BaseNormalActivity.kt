@@ -28,11 +28,23 @@ abstract class BaseNormalActivity<DB : ViewDataBinding> : AppCompatActivity(), I
         mBinding.executePendingBindings()
 
         initView()
+        initEvent()
         initData()
         loadData()
     }
 
+    override fun initEvent() {
+    }
+
     override fun initData() {
+    }
+
+    override fun loadData() {
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mBinding.unbind()
     }
 
 }

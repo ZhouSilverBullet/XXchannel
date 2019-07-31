@@ -1,9 +1,9 @@
-package com.sdxxtop.xxchannel
+package com.sdxxtop.xxchannel.ui
 
 import androidx.lifecycle.MediatorLiveData
-import com.orhanobut.logger.Logger
 import com.sdxxtop.base.BaseViewModel
 import com.sdxxtop.network.helper.Params
+import com.sdxxtop.xxchannel.App
 import com.sdxxtop.xxchannel.model.api.RetrofitClient
 import com.sdxxtop.xxchannel.model.data.InitData
 import es.dmoral.toasty.Toasty

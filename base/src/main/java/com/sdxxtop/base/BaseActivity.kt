@@ -32,16 +32,37 @@ abstract class BaseActivity<DB : ViewDataBinding, VM : ViewModel> : AppCompatAct
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         mBinding.lifecycleOwner = this
+        bindVM()
         mBinding.executePendingBindings()
 
         initView()
         initObserve()
+        initEvent()
         initData()
         loadData()
     }
 
+    override fun bindVM() {
+
+    }
+
+    override fun initEvent() {
+    }
+
     override fun initData() {
+    }
+
+    /**
+     * 不一定有页面一定要重写这个方法
+     */
+    override fun loadData() {
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mBinding.unbind()
     }
 
 //    inline fun <reified vm : ViewModel> bindViewModel(): vm {

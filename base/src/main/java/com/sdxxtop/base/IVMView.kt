@@ -15,6 +15,11 @@ interface IVMView<VM : ViewModel> : IView {
      */
     fun vmClazz(): Class<VM>
 
+    /**
+     * 用于 dataBind和vm绑定的方法
+     * 布局里头如果有 vm 然后进行和 databinding进行绑定
+     */
+    fun bindVM()
 
     /**
      * 初始化 vm的Observe
@@ -22,4 +27,6 @@ interface IVMView<VM : ViewModel> : IView {
      *
      */
     fun initObserve()
+
+
 }

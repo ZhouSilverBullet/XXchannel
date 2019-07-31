@@ -3,8 +3,8 @@ package com.sdxxtop.xxchannel
 import com.billy.cc.core.component.CC
 import com.billy.cc.core.component.IComponent
 import com.billy.cc.core.component.CCResult
-import android.net.sip.SipManager.getCallId
 import com.billy.cc.core.component.CCUtil
+import com.sdxxtop.xxchannel.ui.MainActivity
 
 
 /**

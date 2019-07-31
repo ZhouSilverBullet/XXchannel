@@ -11,18 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".ui.MainActivity">
+        tools:context=".ui.servicecontract.ServiceContractActivity">
 
-        <Button
-            android:onClick="updateApk"
+        <FrameLayout
+            android:id="@+id/fl_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="点击更新" />
-
-        <Button
-            android:onClick="skipLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="点击更新" />
+            android:layout_height="match_parent" />
     </LinearLayout>
 </layout>

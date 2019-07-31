@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.WindowManager
-import com.sdxxtop.xxchannel.MainActivity
+import com.sdxxtop.xxchannel.ui.MainActivity
 import com.sdxxtop.xxchannel.R
 
 class SplashActivity : AppCompatActivity() {

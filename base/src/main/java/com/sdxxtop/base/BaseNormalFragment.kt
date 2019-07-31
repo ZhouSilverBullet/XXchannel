@@ -32,7 +32,11 @@ abstract class BaseNormalFragment<DB : ViewDataBinding> : Fragment(), IView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
+        initEvent()
         initData()
+    }
+
+    override fun initEvent() {
     }
 
     override fun onResume() {
@@ -40,4 +44,8 @@ abstract class BaseNormalFragment<DB : ViewDataBinding> : Fragment(), IView {
         loadData()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        mBinding.unbind()
+    }
 }

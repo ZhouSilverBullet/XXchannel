@@ -1,11 +1,14 @@
-package com.sdxxtop.xxchannel
+package com.sdxxtop.xxchannel.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.luck.picture.lib.permissions.RxPermissions
 import com.sdxxtop.common.dialog.download.DownloadDialog
+import com.sdxxtop.xxchannel.R
+import com.sdxxtop.xxchannel.ui.login.LoginActivity
 
 class MainActivity : AppCompatActivity() {
     val mainViewModel = MainViewModel()
@@ -28,5 +31,9 @@ class MainActivity : AppCompatActivity() {
     fun updateApk(v: View) {
         //点击更新
         mainViewModel.loadData()
+    }
+
+    fun skipLogin(v: View) {
+        startActivity(Intent(this, LoginActivity::class.java))
     }
 }
