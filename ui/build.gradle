@@ -42,6 +42,8 @@ dependencies {
 
     api "de.hdodenhof:circleimageview:$rootProject.circleimageview"
 
+    implementation project(path: ':common')
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

@@ -94,7 +94,8 @@ dependencies {
     implementation project(path: ':base')
     implementation project(path: ':common')
     implementation project(path: ':ui')
-    implementation project(path: ':amap_sdk')
+    implementation project(path: ':sdk_amap')
+    implementation project(path: ':sdk_baiduface')
 
     //splash直接依赖上
 //    implementation project(path: ':splash')

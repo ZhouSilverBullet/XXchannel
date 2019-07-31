@@ -8,12 +8,13 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/amap_sdk" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/base" />
             <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/network" />
             <option value="$PROJECT_DIR$/picture_library" />
+            <option value="$PROJECT_DIR$/sdk_amap" />
+            <option value="$PROJECT_DIR$/sdk_baiduface" />
             <option value="$PROJECT_DIR$/ucrop" />
             <option value="$PROJECT_DIR$/ui" />
             <option value="$PROJECT_DIR$/xuxin_webview" />

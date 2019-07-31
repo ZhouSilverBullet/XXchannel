@@ -2,6 +2,7 @@ package com.sdxxtop.xxchannel
 
 import android.content.Context
 import android.util.Log
+import com.baidu.idl.face.FaceSession
 import com.sdxxtop.base.BaseApplication
 import com.sdxxtop.common.CommonSession
 import com.sdxxtop.network.NetworkSession
@@ -31,6 +32,8 @@ class App : BaseApplication() {
         NetworkSession.initNetwork(this, BuildConfig.VERSION_CODE)
         //初始化地图
         MapSession.initAMap(this)
+
+        FaceSession.initFace(this, "licenseID")
 
         Log.i(TAG, "--------------调取-------------->")
     }
