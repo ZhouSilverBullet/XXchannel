@@ -5,6 +5,7 @@ import android.util.Log
 import com.sdxxtop.base.BaseApplication
 import com.sdxxtop.common.CommonSession
 import com.sdxxtop.network.NetworkSession
+import com.sdxxtop.sdk.MapSession
 import kotlin.properties.Delegates
 
 /**
@@ -28,6 +29,8 @@ class App : BaseApplication() {
         CommonSession.initCommon(this, "$packageName.provider")
         //初始化network模块
         NetworkSession.initNetwork(this, BuildConfig.VERSION_CODE)
+        //初始化地图
+        MapSession.initAMap(this)
 
         Log.i(TAG, "--------------调取-------------->")
     }

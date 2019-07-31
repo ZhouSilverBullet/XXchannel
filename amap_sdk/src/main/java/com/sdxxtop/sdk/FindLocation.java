@@ -1,11 +1,17 @@
 package com.sdxxtop.sdk;
 
+import android.Manifest;
+import android.app.Activity;
 import android.util.Log;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
+import com.luck.picture.lib.permissions.RxPermissions;
+import com.sdxxtop.common.utils.UIUtils;
+
+import io.reactivex.functions.Consumer;
 
 /**
  * 用于定位获取金纬度
@@ -44,9 +50,32 @@ public class FindLocation implements AMapLocationListener {
 
     }
 
-    public void location() {
+    public void location(Activity activity) {
+        RxPermissions rxPermissions = new RxPermissions(activity);
+        location(rxPermissions);
+    }
 
-        mlocationClient = new AMapLocationClient(AMapSession.getContext());
+    public void location(RxPermissions rxPermissions) {
+        if (rxPermissions == null) {
+            return;
+        }
+
+        rxPermissions.request(Manifest.permission.ACCESS_FINE_LOCATION).subscribe(new Consumer<Boolean>() {
+            @Override
+            public void accept(Boolean aBoolean) throws Exception {
+                if (aBoolean) {
+                    location();
+                } else {
+                    UIUtils.showToast("请开启定位权限再进行尝试");
+                }
+            }
+        });
+    }
+
+    private void location() {
+
+
+        mlocationClient = new AMapLocationClient(MapSession.getContext());
 
         //声明mLocationOption对象
         AMapLocationClientOption mLocationOption = new AMapLocationClientOption();

@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.luck.picture.lib.permissions.RxPermissions
 import com.sdxxtop.common.dialog.download.DownloadDialog
+import com.sdxxtop.sdk.MapTestActivity
 import com.sdxxtop.xxchannel.R
 import com.sdxxtop.xxchannel.ui.login.LoginActivity
 
@@ -35,5 +36,9 @@ class MainActivity : AppCompatActivity() {
 
     fun skipLogin(v: View) {
         startActivity(Intent(this, LoginActivity::class.java))
+    }
+
+    fun openAMap(v: View) {
+        startActivity(Intent(this, MapTestActivity::class.java))
     }
 }

@@ -9,11 +9,11 @@ import java.lang.ref.WeakReference
  * Version: 1.0
  * Description:
  */
-object AMapSession {
+object MapSession {
     private lateinit var contextDef: WeakReference<Context>
 
     fun initAMap(context: Context) {
-        this@AMapSession.contextDef = WeakReference(context)
+        this@MapSession.contextDef = WeakReference(context)
     }
 
     @JvmStatic
