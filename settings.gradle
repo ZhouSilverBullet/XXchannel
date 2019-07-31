@@ -1,1 +1,1 @@
-include ':app', ':base', ':common', ':network', ':picture_library', ':ucrop', ':ui', ':xuxin_webview'
+include ':app', ':base', ':common', ':network', ':picture_library', ':ucrop', ':ui', ':xuxin_webview', ':amap_sdk'
