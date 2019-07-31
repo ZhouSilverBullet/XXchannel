@@ -48,6 +48,30 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
+
+        <!-- 阿里云推送 start -->
+        <meta-data
+            android:name="com.alibaba.app.appkey"
+            android:value="27639098" />
+        <meta-data
+            android:name="com.alibaba.app.appsecret"
+            android:value="6559a257486cf820da80d94854657544" />
+
+        <receiver
+            android:name=".push.AliMessageReceiver"
+            android:exported="false"> <!-- 为保证receiver安全，建议设置不可导出，如需对其他应用开放可通过android：permission进行限制 -->
+            <intent-filter>
+                <action android:name="com.alibaba.push2.action.NOTIFICATION_OPENED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.alibaba.push2.action.NOTIFICATION_REMOVED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.alibaba.sdk.android.push.RECEIVE" />
+            </intent-filter>
+        </receiver>
+        <!-- 阿里云推送 end -->
     </application>
 
 </manifest>
