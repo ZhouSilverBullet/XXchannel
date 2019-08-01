@@ -6,6 +6,8 @@ import androidx.databinding.DataBindingUtil.setContentView
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
+import com.sdxxtop.base.lifecycle.ActivityLifecycleImpl
+import com.umeng.analytics.MobclickAgent
 
 /**
  * Email: sdxxtop@163.com
@@ -24,6 +26,9 @@ abstract class BaseNormalActivity<DB : ViewDataBinding> : AppCompatActivity(), I
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        lifecycle.addObserver(ActivityLifecycleImpl(this))
+
         mBinding.lifecycleOwner = this
         mBinding.executePendingBindings()
 

@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil.setContentView
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
+import com.sdxxtop.base.lifecycle.ActivityLifecycleImpl
 
 /**
  * Email: sdxxtop@163.com
@@ -32,6 +33,8 @@ abstract class BaseActivity<DB : ViewDataBinding, VM : ViewModel> : AppCompatAct
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        lifecycle.addObserver(ActivityLifecycleImpl(this))
 
         mBinding.lifecycleOwner = this
         bindVM()

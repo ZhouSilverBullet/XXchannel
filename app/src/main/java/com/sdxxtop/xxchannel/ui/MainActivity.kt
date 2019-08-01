@@ -6,6 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.luck.picture.lib.permissions.RxPermissions
+import com.sdxxtop.base.lifecycle.ActivityLifecycleImpl
 import com.sdxxtop.common.dialog.download.DownloadDialog
 import com.sdxxtop.sdk.MapTestActivity
 import com.sdxxtop.xxchannel.R
@@ -18,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        lifecycle.addObserver(ActivityLifecycleImpl(this))
         initObserve()
     }
 

@@ -1,1 +1,1 @@
-include ':app', ':base', ':common', ':network', ':picture_library', ':ucrop', ':ui', ':xuxin_webview', ':sdk_amap', ':sdk_baiduface', ':sdk_alipush'
+include ':app', ':base', ':common', ':network', ':picture_library', ':ucrop', ':ui', ':xuxin_webview', ':sdk_amap', ':sdk_baiduface', ':sdk_alipush', ':sdk_umenganalytics'

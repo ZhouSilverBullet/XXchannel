@@ -9,6 +9,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
+import com.sdxxtop.base.lifecycle.FragmentLifecycleImpl
 
 /**
  * Email: sdxxtop@163.com
@@ -42,6 +43,7 @@ abstract class BaseLazyFragment<DB : ViewDataBinding, VM : ViewModel> : Fragment
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         mBinding = DataBindingUtil.inflate<DB>(inflater, layoutId(), container, false)
+        lifecycle.addObserver(FragmentLifecycleImpl(javaClass.simpleName))
         mBinding.lifecycleOwner = this
         return mBinding.root
     }

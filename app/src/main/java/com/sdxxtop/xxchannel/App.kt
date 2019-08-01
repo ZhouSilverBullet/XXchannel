@@ -6,6 +6,7 @@ import com.baidu.idl.face.FaceSession
 import com.sdxxtop.base.BaseApplication
 import com.sdxxtop.common.CommonSession
 import com.sdxxtop.network.NetworkSession
+import com.sdxxtop.sdk.AnalyticsSession
 import com.sdxxtop.sdk.MapSession
 import kotlin.properties.Delegates
 
@@ -34,6 +35,9 @@ class App : BaseApplication() {
         MapSession.initAMap(this)
 
         FaceSession.initFace(this, "licenseID")
+
+        //友盟统计
+        AnalyticsSession.initAnalytics(this, BuildConfig.DEBUG, "5d4245600cafb2f31f0009f5")
 
         Log.i(TAG, "--------------调取-------------->")
     }

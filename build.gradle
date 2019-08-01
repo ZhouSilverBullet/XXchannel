@@ -9,6 +9,7 @@ buildscript {
         maven {
             url 'http://maven.aliyun.com/nexus/content/repositories/releases/'
         }
+        maven { url 'https://dl.bintray.com/umsdk/release' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.4.2'
@@ -27,6 +28,7 @@ allprojects {
         maven {
             url 'http://maven.aliyun.com/nexus/content/repositories/releases/'
         }
+        maven { url 'https://dl.bintray.com/umsdk/release' }
     }
 }
 
