@@ -94,6 +94,7 @@ dependencies {
     implementation project(path: ':app_base')
     implementation project(path: ':app_common')
     implementation project(path: ':app_ui')
+    implementation project(path: ':app_crash')
     implementation project(path: ':sdk_amap')
     implementation project(path: ':sdk_baiduface')
     implementation project(path: ':sdk_alipush')

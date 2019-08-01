@@ -14,21 +14,27 @@
         tools:context=".ui.MainActivity">
 
         <Button
-            android:onClick="updateApk"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="updateApk"
             android:text="点击更新" />
 
         <Button
-            android:onClick="skipLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="skipLogin"
             android:text="点击登录" />
 
         <Button
-            android:onClick="openAMap"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="openAMap"
             android:text="打开高德地图" />
+
+        <Button
+            android:onClick="openCrash"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="打开日志系统" />
     </LinearLayout>
 </layout>

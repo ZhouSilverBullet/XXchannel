@@ -4,6 +4,7 @@ import android.content.Context
 import android.text.TextUtils
 import android.util.TypedValue
 import android.view.View
+import com.google.gson.Gson
 import com.sdxxtop.common.utils.UIUtils
 import com.sdxxtop.common.utils.UIUtils.getResource
 import es.dmoral.toasty.Toasty
@@ -14,6 +15,8 @@ import es.dmoral.toasty.Toasty
  * Version: 1.0
  * Description:
  */
+
+val GSON: Gson = Gson()
 
 enum class ToastType {
     NONE,//不使用Toasty

@@ -1,6 +1,7 @@
 package com.sdxxtop.sdk
 
 import android.content.Context
+import com.umeng.analytics.MobclickAgent
 import com.umeng.commonsdk.UMConfigure
 
 /**
@@ -16,6 +17,10 @@ object AnalyticsSession {
      */
     fun initAnalytics(applicationContext: Context, isDebug: Boolean, appKey: String, channel: String = "Umeng", deviceType: Int = UMConfigure.DEVICE_TYPE_PHONE, pushSecret: String? = null) {
         initYouMeng(applicationContext, isDebug, appKey, channel, deviceType, pushSecret)
+        if (isDebug) {
+            // 关闭debug错误统计
+            MobclickAgent.setCatchUncaughtExceptions(false)
+        }
     }
 
     private fun initYouMeng(applicationContext: Context, isDebug: Boolean, appKey: String, channel: String, deviceType: Int, pushSecret: String?) {

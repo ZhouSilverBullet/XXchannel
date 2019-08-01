@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import com.luck.picture.lib.permissions.RxPermissions
 import com.sdxxtop.base.lifecycle.ActivityLifecycleImpl
 import com.sdxxtop.common.dialog.download.DownloadDialog
+import com.sdxxtop.crash.test.CrashTestActivity
 import com.sdxxtop.sdk.MapTestActivity
 import com.sdxxtop.xxchannel.R
 import com.sdxxtop.xxchannel.ui.login.LoginActivity
@@ -42,5 +43,9 @@ class MainActivity : AppCompatActivity() {
 
     fun openAMap(v: View) {
         startActivity(Intent(this, MapTestActivity::class.java))
+    }
+
+    fun openCrash(v: View) {
+        startActivity(Intent(this, CrashTestActivity::class.java))
     }
 }
