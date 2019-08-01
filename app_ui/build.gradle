@@ -26,11 +26,6 @@ android {
         enabled = true
     }
 
-    compileOptions {
-        sourceCompatibility = '1.8'
-        targetCompatibility = '1.8'
-    }
-
 }
 
 dependencies {
@@ -45,30 +40,11 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutines"
     implementation "com.github.CymChad:BaseRecyclerViewAdapterHelper:$rootProject.BaseRecyclerViewAdapterHelper"
 
-    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofit"
-    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofit"
-//    implementation "com.squareup.retrofit2:adapter-rxjava2:rootProject.retrofit"
+    api "de.hdodenhof:circleimageview:$rootProject.circleimageview"
 
-    implementation "com.bennyhuo.kotlin:coroutines-android-mainscope:$rootProject.mainscope"
-    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycle"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycle"
-
-    implementation "com.github.bumptech.glide:glide:$rootProject.glide"
-
-
-    api project(path: ':common')
-    api project(path: ':network')
-    api project(path: ':sdk_umenganalytics')
-
-    debugImplementation "com.squareup.leakcanary:leakcanary-android:$rootProject.leakcanary"
-
+    implementation project(path: ':app_common')
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
-}
-
-repositories {
-    mavenCentral()
 }

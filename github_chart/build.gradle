@@ -22,10 +22,14 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+
     dataBinding {
         enabled = true
     }
-
 }
 
 dependencies {
@@ -34,15 +38,8 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.appcompat:appcompat:$rootProject.appcompat"
     implementation "androidx.core:core-ktx:$rootProject.corektx"
-    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintlayout"
-    implementation "com.google.android.material:material:$rootProject.material"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutines"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutines"
-    implementation "com.github.CymChad:BaseRecyclerViewAdapterHelper:$rootProject.BaseRecyclerViewAdapterHelper"
 
-    api "de.hdodenhof:circleimageview:$rootProject.circleimageview"
-
-    implementation project(path: ':common')
+    api 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
