@@ -17,5 +17,11 @@
         android:onClick="readCrash"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="点击读取奔溃日志" />
+        android:text="点击上传奔溃日志" />
+
+    <Button
+        android:onClick="deleteCrash"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="点击删除溃日志" />
 </LinearLayout>

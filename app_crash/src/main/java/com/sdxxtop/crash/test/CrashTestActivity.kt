@@ -6,6 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.sdxxtop.common.GSON
 import com.sdxxtop.common.showToasty
+import com.sdxxtop.crash.PushData
 import com.sdxxtop.crash.R
 import com.sdxxtop.crash.api.CrashHttpClient
 import com.sdxxtop.crash.data.CrashData
@@ -48,26 +49,32 @@ class CrashTestActivity : AppCompatActivity() {
     }
 
     fun readCrash(v: View) {
-//        showToasty(queryCrashData)
-        mainScope.launch {
-            val queryCrashData = CrashRealmHelper.INSTANCE.queryCrashData()
-            val list = ArrayList<String>()
-            queryCrashData.forEach {
-                val copyToRealm = CrashRealmHelper.INSTANCE.mRealm.copyFromRealm(it)
-                list.add(GSON.toJson(copyToRealm))
-            }
-            try {
-                val addCrash = CrashHttpClient.crashApiService.addCrash(list)
-                if (addCrash.code == 200) {
-                    showToasty("上传成功")
-                } else {
-                    showToasty("上传失败：${addCrash.msg}")
-                }
-            } catch (t: Throwable) {
-                showToasty("${t.message}")
-                Log.e("CrashTestActivity", t.message)
-            }
 
-        }
+        PushData.pushData()
+//        showToasty(queryCrashData)
+//        mainScope.launch {
+//            val queryCrashData = CrashRealmHelper.INSTANCE.queryCrashDataIsNotPush()
+//            val list = ArrayList<String>()
+//            queryCrashData.forEach {
+//                val copyToRealm = CrashRealmHelper.INSTANCE.mRealm.copyFromRealm(it)
+//                list.add(GSON.toJson(copyToRealm))
+//            }
+//            try {
+//                val addCrash = CrashHttpClient.crashApiService.addCrash(list)
+//                if (addCrash.code == 200) {
+//                    showToasty("上传成功")
+//                } else {
+//                    showToasty("上传失败：${addCrash.msg}")
+//                }
+//            } catch (t: Throwable) {
+//                showToasty("${t.message}")
+//                Log.e("CrashTestActivity", t.message)
+//            }
+//
+//        }
+    }
+
+    fun deleteCrash(v: View) {
+        CrashRealmHelper.INSTANCE.deleteCrashDataIsPush()
     }
 }

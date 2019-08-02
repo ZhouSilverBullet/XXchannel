@@ -13,7 +13,7 @@ interface CrashDBHelper {
     /**
      * 查询 crashData
      */
-    fun queryCrashData(): List<CrashData>
+    fun queryCrashDataIsNotPush(): List<CrashData>
 
     /**
      * 插入 crashData
@@ -21,8 +21,8 @@ interface CrashDBHelper {
     fun installCrashData(crashData: CrashData)
 
     /**
-     * 删除 crashData
+     * 删除 crashData 已经上传过的
      */
-    fun deleteCrashData(crashData: CrashData)
+    fun deleteCrashDataIsPush()
 
 }

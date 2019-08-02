@@ -4,6 +4,7 @@ import android.os.Build
 import com.google.gson.annotations.Expose
 import com.sdxxtop.crash.CrashSession
 import io.realm.RealmObject
+import io.realm.annotations.PrimaryKey
 
 /**
  * Email: zhousaito@163.com
@@ -15,8 +16,7 @@ open class CrashData(
         var userid: String = "",
         var crash_info: String = "",
         var crash_time: String = "",
-        @Expose(deserialize = false)
-        var isPushServiceSuccess:Boolean = false,
+//        var isPushServiceSuccess: Boolean = false,
         var app_id: String = CrashSession.getPackageName(),
         var app_name: String = CrashSession.getAppName(),
         //app的版本号

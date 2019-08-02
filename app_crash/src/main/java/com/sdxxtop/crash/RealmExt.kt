@@ -1,7 +1,10 @@
 package com.sdxxtop.crash
 
+import com.google.gson.ExclusionStrategy
+import com.google.gson.FieldAttributes
+import com.google.gson.GsonBuilder
 import com.sdxxtop.common.GSON
-import io.realm.RealmResults
+import com.sdxxtop.crash.data.CrashData
 
 /**
  * Email: zhousaito@163.com
@@ -9,4 +12,18 @@ import io.realm.RealmResults
  * Version: 1.0
  * Description:
  */
-fun <T> RealmResults<T>.toJson() = GSON.toJson(this)
+fun CrashData.toJson() = GSON.toJson(this)
+
+/**
+ * gson 自定义忽略
+ */
+fun CrashData.toJson2() = GsonBuilder().setExclusionStrategies(object : ExclusionStrategy {
+    override fun shouldSkipClass(clazz: Class<*>?): Boolean {
+        return false
+    }
+
+    override fun shouldSkipField(f: FieldAttributes?): Boolean {
+        return f?.name?.equals("isPushServiceSuccess", ignoreCase = true) ?: false
+    }
+
+}).create().toJson(this)

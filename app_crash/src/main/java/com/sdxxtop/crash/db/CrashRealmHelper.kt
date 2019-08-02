@@ -13,6 +13,7 @@ import io.realm.RealmResults
  */
 class CrashRealmHelper : CrashDBHelper {
     companion object {
+        @JvmStatic
         val INSTANCE by lazy {
             CrashRealmHelper()
         }
@@ -42,8 +43,8 @@ class CrashRealmHelper : CrashDBHelper {
 //        }.build())
     }
 
-    override fun queryCrashData(): RealmResults<CrashData> {
-        return mRealm.where(CrashData::class.java).findAll()
+    override fun queryCrashDataIsNotPush(): RealmResults<CrashData> {
+        return mRealm.where(CrashData::class.java).equalTo("isPushServiceSuccess", false).findAll()
     }
 
 //    fun queryCrashDataForJson(): String {
@@ -56,9 +57,10 @@ class CrashRealmHelper : CrashDBHelper {
         mRealm.commitTransaction()
     }
 
-    override fun deleteCrashData(crashData: CrashData) {
-//        mRealm.beginTransaction()
-//        mRealm.copyToRealmOrUpdate(crashData)
-//        mRealm.commitTransaction()
+    override fun deleteCrashDataIsPush() {
+        mRealm.beginTransaction()
+        mRealm.where(CrashData::class.java)
+                .findAll()?.deleteAllFromRealm()
+        mRealm.commitTransaction()
     }
 }

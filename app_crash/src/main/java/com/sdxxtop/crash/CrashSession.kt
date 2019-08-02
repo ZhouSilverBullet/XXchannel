@@ -31,7 +31,7 @@ object CrashSession {
         //初始化crash数据库
         Realm.init(context)
         //把handler crash初始化
-        CrashHandler.instance.init(context)
+        CrashHandler.getInstance().init(context)
 
     }
 
