@@ -44,7 +44,7 @@ class CrashRealmHelper : CrashDBHelper {
     }
 
     override fun queryCrashDataIsNotPush(): RealmResults<CrashData> {
-        return mRealm.where(CrashData::class.java).equalTo("isPushServiceSuccess", false).findAll()
+        return mRealm.where(CrashData::class.java).findAll()
     }
 
 //    fun queryCrashDataForJson(): String {

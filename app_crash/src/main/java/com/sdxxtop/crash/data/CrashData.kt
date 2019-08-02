@@ -17,6 +17,7 @@ open class CrashData(
         var crash_info: String = "",
         var crash_time: String = "",
 //        var isPushServiceSuccess: Boolean = false,
+        var crash_reason: String = "",
         var app_id: String = CrashSession.getPackageName(),
         var app_name: String = CrashSession.getAppName(),
         //app的版本号

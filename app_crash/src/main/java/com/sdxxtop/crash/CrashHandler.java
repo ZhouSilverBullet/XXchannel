@@ -55,7 +55,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
 
 	/**
 	 * 初始化
-	 * 
+	 *
 	 * @param context
 	 */
 	public void init(Context context) {
@@ -88,7 +88,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
 
 	/**
 	 * 自定义错误处理,收集错误信息 发送错误报告等操作均在此完成.
-	 * 
+	 *
 	 * @param ex
 	 * @return true:如果处理了该异常信息;否则返回false.
 	 */
@@ -96,7 +96,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
 		if (ex == null) {
 			return false;
 		}
-		
+
 		// 使常用Toast来显示异信息
 		AsyncTask.THREAD_POOL_EXECUTOR.execute(new Runnable() {
 			@Override
@@ -115,7 +115,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
 
 	/**
 	 * 收集设备参数信息
-	 * 
+	 *
 	 * @param ctx
 	 */
 	public void collectDeviceInfo(Context ctx) {
@@ -142,7 +142,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
 
 	/**
 	 * 保存错误信息到文件中
-	 * 
+	 *
 	 * @param ex
 	 * @return 返回文件名称,便于将文件传送到服务器
 	 */
@@ -156,7 +156,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
 			sb2.append(key + "=" + value + "<br/>");
 		}
 
-		writeToRealm(sb2);
+		writeToRealm(ex, sb2);
 
 		String fileName = writeToCrashFile(ex, sb);
 		if (fileName != null) {
@@ -165,10 +165,11 @@ public class CrashHandler implements UncaughtExceptionHandler {
 		return null;
 	}
 
-	private void writeToRealm(StringBuffer sb) {
+	private void writeToRealm(Throwable ex, StringBuffer sb) {
 		CrashData crashData = new CrashData();
 		crashData.setUserid("1111");
 		crashData.setCrash_info(sb.toString());
+		crashData.setCrash_reason(ex.getMessage());
 
 		CrashRealmHelper.getINSTANCE().installCrashData(crashData);
 

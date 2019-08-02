@@ -47,6 +47,9 @@ object PushData {
     }
 
     private fun handleSuccessData() {
-        CrashRealmHelper.INSTANCE.deleteCrashDataIsPush()
+        CrashRealmHelper.INSTANCE.mRealm.executeTransaction {
+            CrashRealmHelper.INSTANCE.deleteCrashDataIsPush()
+        }
+
     }
 }
