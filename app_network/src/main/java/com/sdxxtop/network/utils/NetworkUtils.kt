@@ -6,6 +6,7 @@ import android.text.TextUtils
 import com.google.gson.JsonParseException
 import com.google.gson.JsonSyntaxException
 import com.orhanobut.logger.Logger
+import com.sdxxtop.common.utils.LogUtil
 import org.apache.http.conn.ConnectTimeoutException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
@@ -28,7 +29,7 @@ object NetworkUtils {
     fun getHttpExceptionMsg(exception: Throwable?, errorMsg: String = ""): String {
         var defaultMsg = "未知错误"
         if (exception != null) {
-            Logger.e("Request Exception:" + exception.message)
+            LogUtil.e("Request Exception:" + exception.message)
             if (exception is UnknownHostException) {
                 defaultMsg = "您的网络可能有问题,请确认连接上有效网络后重试"
             } else if (exception is ConnectTimeoutException) {
@@ -44,7 +45,7 @@ object NetworkUtils {
             }
         } else {
             if (!TextUtils.isEmpty(errorMsg)) {
-                Logger.e("Request Exception errorMsg: $errorMsg")
+                LogUtil.e("Request Exception errorMsg: $errorMsg")
                 val lowerMsg = errorMsg.toLowerCase(Locale.ENGLISH)
                 if (lowerMsg.contains("java")
                         || lowerMsg.contains("exception")

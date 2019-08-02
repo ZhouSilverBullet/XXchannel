@@ -54,7 +54,6 @@ dependencies {
     api "com.orhanobut:logger:$rootProject.orhanobut_logger"
 
     api project(path: ':github_picture_library')
-    implementation project(path: ':app_network')
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'

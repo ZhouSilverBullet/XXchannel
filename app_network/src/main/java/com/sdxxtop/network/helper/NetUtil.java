@@ -4,6 +4,7 @@ package com.sdxxtop.network.helper;
 import android.util.Base64;
 
 import com.orhanobut.logger.Logger;
+import com.sdxxtop.common.utils.LogUtil;
 
 import org.json.JSONObject;
 
@@ -58,7 +59,7 @@ public class NetUtil {
         }
         map.put("sn", NetUtil.md5(sb.toString() + HttpConstantValue.APP_KEY).toUpperCase());
         for (String key : map.keySet()) {
-            Logger.i("key  " + key + "  value  " + map.get(key));
+            LogUtil.i("key  " + key + "  value  " + map.get(key));
         }
         JSONObject json = new JSONObject(map);
         String jsonStr = json.toString();

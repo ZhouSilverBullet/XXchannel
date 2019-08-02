@@ -1,8 +1,10 @@
-package com.sdxxtop.crash
+package com.sdxxtop.crash.push
 
+import com.sdxxtop.common.utils.LogUtil
 import com.sdxxtop.common.utils.UIUtils
 import com.sdxxtop.crash.api.CrashHttpClient
 import com.sdxxtop.crash.db.CrashRealmHelper
+import com.sdxxtop.crash.toJson
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import java.util.*
@@ -37,7 +39,7 @@ object PushData {
                 }
             } catch (t: Throwable) {
 //                UIUtils.showToast("${t.message}")
-//                Logger.e("CrashTestActivity", t.message)
+                LogUtil.e(t.message)
             }
 
 

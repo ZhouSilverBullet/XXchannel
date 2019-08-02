@@ -1,18 +1,13 @@
 package com.sdxxtop.crash.test
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.sdxxtop.common.GSON
-import com.sdxxtop.common.showToasty
-import com.sdxxtop.crash.PushData
+import com.sdxxtop.crash.push.PushData
 import com.sdxxtop.crash.R
-import com.sdxxtop.crash.api.CrashHttpClient
 import com.sdxxtop.crash.data.CrashData
 import com.sdxxtop.crash.db.CrashRealmHelper
 import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 

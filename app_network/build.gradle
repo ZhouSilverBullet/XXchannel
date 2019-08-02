@@ -42,6 +42,7 @@ dependencies {
     api "com.github.GrenderG:Toasty:$rootProject.Toasty"
     api "com.orhanobut:logger:$rootProject.orhanobut_logger"
 
+    implementation project(path: ':app_common')
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'

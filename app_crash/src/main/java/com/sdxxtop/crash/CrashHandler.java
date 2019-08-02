@@ -13,6 +13,7 @@ import android.os.Looper;
 import com.sdxxtop.common.utils.UIUtils;
 import com.sdxxtop.crash.data.CrashData;
 import com.sdxxtop.crash.db.CrashRealmHelper;
+import com.sdxxtop.crash.push.PushData;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -170,6 +171,11 @@ public class CrashHandler implements UncaughtExceptionHandler {
 		crashData.setCrash_info(sb.toString());
 
 		CrashRealmHelper.getINSTANCE().installCrashData(crashData);
+
+		/**
+		 * 如果还有机会上传的话就上传
+		 */
+		PushData.pushData();
 	}
 
 	@Nullable
