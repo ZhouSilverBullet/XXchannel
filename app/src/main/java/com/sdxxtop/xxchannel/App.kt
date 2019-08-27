@@ -3,13 +3,17 @@ package com.sdxxtop.xxchannel
 import android.content.Context
 import android.util.Log
 import com.baidu.idl.face.FaceSession
+import com.sdxxtop.analysis.impl.ActivityLifecycleListener
+import com.sdxxtop.analysis.TrackPoint
+import com.sdxxtop.analysis.callback.TrackPointCallBack
 import com.sdxxtop.base.BaseApplication
 import com.sdxxtop.common.CommonSession
 import com.sdxxtop.crash.CrashSession
+import com.sdxxtop.mapsdk.MapSession
 import com.sdxxtop.network.NetworkSession
 import com.sdxxtop.sdk.AnalyticsSession
-import com.sdxxtop.sdk.MapSession
 import kotlin.properties.Delegates
+
 
 /**
  * Email: zhousaito@163.com
@@ -46,6 +50,10 @@ class App : BaseApplication() {
         CrashSession.initCrash(this, isDebug(), BuildConfig.VERSION_NAME)
 
         Log.i(TAG, "--------------调取-------------->")
+
+        TrackPoint.init()
+
+        registerActivityLifecycleCallbacks(ActivityLifecycleListener())
 
     }
 

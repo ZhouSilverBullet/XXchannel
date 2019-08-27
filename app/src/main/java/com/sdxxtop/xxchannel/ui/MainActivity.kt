@@ -5,11 +5,15 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import com.luck.picture.lib.PictureSelector
+import com.luck.picture.lib.config.PictureConfig
+import com.luck.picture.lib.config.PictureMimeType
 import com.luck.picture.lib.permissions.RxPermissions
 import com.sdxxtop.base.lifecycle.ActivityLifecycleImpl
 import com.sdxxtop.common.dialog.download.DownloadDialog
 import com.sdxxtop.crash.test.CrashTestActivity
-import com.sdxxtop.sdk.MapTestActivity
+import com.sdxxtop.mapsdk.MapTestActivity
+import com.sdxxtop.ui.timerselect.BottomDialogView
 import com.sdxxtop.xxchannel.R
 import com.sdxxtop.xxchannel.ui.login.LoginActivity
 
@@ -47,5 +51,19 @@ class MainActivity : AppCompatActivity() {
 
     fun openCrash(v: View) {
         startActivity(Intent(this, CrashTestActivity::class.java))
+    }
+
+    val bottomDialogView by lazy {
+        BottomDialogView(this)
+    }
+
+    fun openSelectPicker(v: View) {
+        bottomDialogView.show()
+    }
+
+    fun openSelectPicture(v: View) {
+        PictureSelector.create(this).openGallery(PictureMimeType.ofImage())
+                .compress(true).selectionMode(PictureConfig.SINGLE)
+                .maxSelectNum(1).forResult(10)
     }
 }

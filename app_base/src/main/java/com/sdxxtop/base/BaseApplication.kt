@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
+import androidx.multidex.MultiDexApplication
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
@@ -20,7 +21,7 @@ import kotlin.properties.Delegates
  * Version: 1.0
  * Description:
  */
-abstract class BaseApplication : Application() {
+abstract class BaseApplication : MultiDexApplication() {
     companion object {
         @JvmStatic
         var INSTANCE: Context by Delegates.notNull()

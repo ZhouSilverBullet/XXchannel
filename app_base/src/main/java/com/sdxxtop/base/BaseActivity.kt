@@ -1,6 +1,7 @@
 package com.sdxxtop.base
 
 import android.os.Bundle
+import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil.setContentView
 import androidx.databinding.ViewDataBinding

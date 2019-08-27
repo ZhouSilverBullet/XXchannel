@@ -43,6 +43,7 @@ dependencies {
     api "de.hdodenhof:circleimageview:$rootProject.circleimageview"
 
     implementation project(path: ':app_common')
+    implementation project(path: ':github_pickers')
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
