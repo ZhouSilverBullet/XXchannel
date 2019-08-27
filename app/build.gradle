@@ -2,21 +2,6 @@ ext.mainApp = true //标记为主app module
 apply from: rootProject.file('cc-settings-2.gradle')
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'android-aspectjx'
-
-aspectjx {
-    enabled true //enabled默认为true，即默认AspectJX生效
-    exclude 'leakcanary.internal' //排除所有package路径中包含`android.support`的class文件及jar文件
-    exclude 'com.scwang' //排除所有package路径中包含`android.support`的class文件及jar文件
-    exclude 'com.amap' //排除所有package路径中包含`android.support`的class文件及jar文件
-    exclude 'com.aliyun' //排除所有package路径中包含`android.support`的class文件及jar文件
-    exclude 'com.bumptech' //排除所有package路径中包含`android.support`的class文件及jar文件
-    exclude 'de.hdodenhof' //排除所有package路径中包含`android.support`的class文件及jar文件
-    exclude 'io.reactivex' //排除所有package路径中包含`android.support`的class文件及jar文件
-    exclude 'io.realm' //排除所有package路径中包含`android.support`的class文件及jar文件
-    exclude 'org.hamcrest' //排除所有package路径中包含`android.support`的class文件及jar文件
-    exclude 'com.yalantis' //排除所有package路径中包含`android.support`的class文件及jar文件
-}
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
@@ -73,6 +58,15 @@ android {
     dataBinding {
         enabled = true
     }
+
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
 }
 
 dependencies {
@@ -109,7 +103,7 @@ dependencies {
     implementation project(path: ':app_common')
     implementation project(path: ':app_ui')
     implementation project(path: ':app_crash')
-    implementation project(path: ':app_analysis')
+    implementation project(path: ':app_tracker')
     implementation project(path: ':sdk_amap')
     implementation project(path: ':sdk_baiduface')
     implementation project(path: ':sdk_alipush')

@@ -13,6 +13,7 @@ import com.sdxxtop.base.lifecycle.ActivityLifecycleImpl
 import com.sdxxtop.common.dialog.download.DownloadDialog
 import com.sdxxtop.crash.test.CrashTestActivity
 import com.sdxxtop.mapsdk.MapTestActivity
+import com.sdxxtop.trackerlibrary.test.TrackerTestActivity
 import com.sdxxtop.ui.timerselect.BottomDialogView
 import com.sdxxtop.xxchannel.R
 import com.sdxxtop.xxchannel.ui.login.LoginActivity
@@ -59,6 +60,10 @@ class MainActivity : AppCompatActivity() {
 
     fun openSelectPicker(v: View) {
         bottomDialogView.show()
+    }
+
+    fun openTracker(v: View) {
+        startActivity(Intent(this, TrackerTestActivity::class.java))
     }
 
     fun openSelectPicture(v: View) {

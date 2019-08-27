@@ -54,5 +54,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="打开图片选择" />
+
+        <Button
+            android:id="@+id/btn_open_tracker"
+            android:onClick="openTracker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="打开统计" />
     </LinearLayout>
 </layout>

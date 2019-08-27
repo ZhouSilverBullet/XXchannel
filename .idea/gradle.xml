@@ -9,11 +9,11 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/app_analysis" />
             <option value="$PROJECT_DIR$/app_base" />
             <option value="$PROJECT_DIR$/app_common" />
             <option value="$PROJECT_DIR$/app_crash" />
             <option value="$PROJECT_DIR$/app_network" />
+            <option value="$PROJECT_DIR$/app_tracker" />
             <option value="$PROJECT_DIR$/app_ui" />
             <option value="$PROJECT_DIR$/app_webview" />
             <option value="$PROJECT_DIR$/github_chart" />
