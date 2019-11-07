@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 
@@ -24,7 +25,15 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.sdxxtop.imagora.rtmtutorial.AgoraIMConfig;
+import com.sdxxtop.imagora.rtmtutorial.ChatManager;
+import com.sdxxtop.imagora.utils.MessageUtil;
 import com.sdxxtop.sdkagora.R;
+
+import io.agora.rtc.Constants;
+import io.agora.rtm.ErrorInfo;
+import io.agora.rtm.ResultCallback;
+import io.agora.rtm.RtmClient;
 
 public class MainAgoraActivity extends BaseActivity {
     private static final String TAG = MainAgoraActivity.class.getSimpleName();
@@ -47,6 +56,8 @@ public class MainAgoraActivity extends BaseActivity {
     private EditText mTopicEdit;
     private TextView mStartBtn;
     private ImageView mLogo;
+
+    private EditText etUserLogin;
 
     private Animator.AnimatorListener mLogoAnimListener = new Animator.AnimatorListener() {
         @Override
@@ -124,16 +135,31 @@ public class MainAgoraActivity extends BaseActivity {
         }
     }
 
+
+    private ChatManager mChatManager;
+    private RtmClient mRtmClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agora_main);
         initUI();
+
+        mChatManager = AgoraIMConfig.the().getChatManager();
+        mRtmClient = mChatManager.getRtmClient();
+
+        findViewById(R.id.btn_logout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doLogout();
+            }
+        });
     }
 
     private void initUI() {
         mBodyLayout = findViewById(R.id.middle_layout);
         mLogo = findViewById(R.id.main_logo);
+        etUserLogin = findViewById(R.id.et_user_login);
 
         mTopicEdit = findViewById(R.id.topic_edit);
         mTopicEdit.addTextChangedListener(mTextWatcher);
@@ -241,10 +267,9 @@ public class MainAgoraActivity extends BaseActivity {
     }
 
     public void gotoRoleActivity() {
-        Intent intent = new Intent(this, RoleActivity.class);
-        String room = mTopicEdit.getText().toString();
-        config().setChannelName(room);
-        startActivity(intent);
+
+        doLogin();
+
     }
 
     private void toastNeedPermissions() {
@@ -284,4 +309,66 @@ public class MainAgoraActivity extends BaseActivity {
         View view = getWindow().getDecorView().getRootView();
         view.getViewTreeObserver().removeOnGlobalLayoutListener(mLayoutObserverListener);
     }
+
+    /**
+     * API CALL: login RTM server
+     */
+    private void doLogin() {
+//        mIsInChat = true;
+        final String userLogin = etUserLogin.getText().toString();
+        mRtmClient.login(null, userLogin, new ResultCallback<Void>() {
+            @Override
+            public void onSuccess(Void responseInfo) {
+                Log.i(TAG, "login success");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+//                        Intent intent = new Intent(LoginActivity.this, SelectionActivity.class);
+//                        intent.putExtra(MessageUtil.INTENT_EXTRA_USER_ID, mUserId);
+//                        startActivity(intent);
+
+                        Intent intent = new Intent(MainAgoraActivity.this, LiveActivity.class);
+                        String room = mTopicEdit.getText().toString();
+                        //默认是主播
+                        intent.putExtra(MessageUtil.INTENT_EXTRA_TARGET_NAME, room);
+                        intent.putExtra(MessageUtil.INTENT_EXTRA_USER_ID, userLogin);
+
+                        intent.putExtra(com.sdxxtop.openlive.Constants.KEY_CLIENT_ROLE, Constants.CLIENT_ROLE_BROADCASTER);
+                        config().setChannelName(room);
+                        startActivity(intent);
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(ErrorInfo errorInfo) {
+                Log.i(TAG, "login failed: " + errorInfo.getErrorCode());
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+//                        mLoginBtn.setEnabled(true);
+//                        mIsInChat = false;
+                        showToast(getString(R.string.login_failed));
+                    }
+                });
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        doLogout();
+    }
+
+
+    /**
+     * API CALL: logout from RTM server
+     */
+    private void doLogout() {
+        mRtmClient.logout(null);
+        MessageUtil.cleanMessageListBeanList();
+    }
+
 }

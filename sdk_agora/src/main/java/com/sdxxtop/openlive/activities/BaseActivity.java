@@ -5,6 +5,7 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.Window;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -145,5 +146,9 @@ public abstract class BaseActivity extends AppCompatActivity implements EventHan
     @Override
     public void onRemoteAudioStats(IRtcEngineEventHandler.RemoteAudioStats stats) {
 
+    }
+
+    public void showToast(String text) {
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 }

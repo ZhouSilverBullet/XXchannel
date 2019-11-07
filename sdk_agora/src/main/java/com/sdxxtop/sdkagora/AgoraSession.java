@@ -2,6 +2,7 @@ package com.sdxxtop.sdkagora;
 
 import android.app.Application;
 
+import com.sdxxtop.imagora.rtmtutorial.AgoraIMConfig;
 import com.sdxxtop.openlive.AgoraAppLiveConfig;
 
 /**
@@ -13,6 +14,8 @@ import com.sdxxtop.openlive.AgoraAppLiveConfig;
 public class AgoraSession {
     private static AgoraAppLiveConfig liveConfig;
 
+    private static AgoraIMConfig imConfig;
+
     public static void init(Application application) {
         if (liveConfig == null) {
             liveConfig = new AgoraAppLiveConfig();
@@ -20,6 +23,13 @@ public class AgoraSession {
 
         liveConfig.setApplication(application);
         liveConfig.onCreate();
+
+
+        if (imConfig == null) {
+            imConfig = new AgoraIMConfig();
+        }
+        imConfig.setApplication(application);
+        imConfig.onCreate();
     }
 
     public static void onTerminate() {

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import com.sdxxtop.imagora.utils.MessageUtil;
 import com.sdxxtop.sdkagora.R;
 
 import io.agora.rtc.Constants;
