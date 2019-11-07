@@ -20,6 +20,7 @@
             <option value="$PROJECT_DIR$/github_pickers" />
             <option value="$PROJECT_DIR$/github_picture_library" />
             <option value="$PROJECT_DIR$/github_picture_library_ucrop" />
+            <option value="$PROJECT_DIR$/sdk_agora" />
             <option value="$PROJECT_DIR$/sdk_alipush" />
             <option value="$PROJECT_DIR$/sdk_amap" />
             <option value="$PROJECT_DIR$/sdk_baiduface" />
@@ -27,6 +28,7 @@
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
+        <option name="testRunner" value="PLATFORM" />
       </GradleProjectSettings>
     </option>
   </component>

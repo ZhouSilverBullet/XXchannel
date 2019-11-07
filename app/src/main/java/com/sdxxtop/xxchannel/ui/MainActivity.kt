@@ -3,8 +3,10 @@ package com.sdxxtop.xxchannel.ui
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureConfig
 import com.luck.picture.lib.config.PictureMimeType
@@ -13,6 +15,7 @@ import com.sdxxtop.base.lifecycle.ActivityLifecycleImpl
 import com.sdxxtop.common.dialog.download.DownloadDialog
 import com.sdxxtop.crash.test.CrashTestActivity
 import com.sdxxtop.mapsdk.MapTestActivity
+import com.sdxxtop.openlive.activities.MainAgoraActivity
 import com.sdxxtop.trackerlibrary.test.TrackerTestActivity
 import com.sdxxtop.ui.timerselect.BottomDialogView
 import com.sdxxtop.xxchannel.R
@@ -27,6 +30,9 @@ class MainActivity : AppCompatActivity() {
 
         lifecycle.addObserver(ActivityLifecycleImpl(this))
         initObserve()
+
+        Glide.with(this).load("").into(ImageView(this))
+
     }
 
     private fun initObserve() {
@@ -64,6 +70,10 @@ class MainActivity : AppCompatActivity() {
 
     fun openTracker(v: View) {
         startActivity(Intent(this, TrackerTestActivity::class.java))
+    }
+
+    fun openLive(v: View) {
+        startActivity(Intent(this, MainAgoraActivity::class.java))
     }
 
     fun openSelectPicture(v: View) {

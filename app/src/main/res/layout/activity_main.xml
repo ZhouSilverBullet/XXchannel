@@ -61,5 +61,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="打开统计" />
+
+        <Button
+            android:id="@+id/btn_open_live"
+            android:onClick="openLive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="打开直播" />
     </LinearLayout>
 </layout>

@@ -11,6 +11,7 @@ import com.sdxxtop.mapsdk.MapSession
 import com.sdxxtop.network.NetworkSession
 import com.sdxxtop.network.utils.SpUtil
 import com.sdxxtop.sdk.AnalyticsSession
+import com.sdxxtop.sdkagora.AgoraSession
 import com.sdxxtop.trackerlibrary.Tracker
 import com.sdxxtop.trackerlibrary.TrackerConfiguration
 import java.util.ArrayList
@@ -56,6 +57,8 @@ class App : BaseApplication() {
         if (isAppProcess(getCurProcessName())) {
             initTracker()
         }
+
+        AgoraSession.init(this)
     }
 
     override fun isDebug(): Boolean {
@@ -64,6 +67,11 @@ class App : BaseApplication() {
 
     fun isAppProcess(process: String): Boolean {
         return packageName.equals(process)
+    }
+
+    override fun onTerminate() {
+        super.onTerminate()
+        AgoraSession.onTerminate()
     }
 
     private fun initTracker() {
