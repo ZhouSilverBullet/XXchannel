@@ -2,10 +2,10 @@ package com.sdxxtop.xxchannel.ui
 
 import androidx.lifecycle.MediatorLiveData
 import com.sdxxtop.base.BaseViewModel
-import com.sdxxtop.network.helper.Params
+import com.sdxxtop.common.dialog.download.data.InitData
 import com.sdxxtop.xxchannel.App
 import com.sdxxtop.xxchannel.model.api.RetrofitClient
-import com.sdxxtop.xxchannel.model.data.InitData
+import com.sdxxtop.xxchannel.model.helper.HttpParams
 import es.dmoral.toasty.Toasty
 
 /**
@@ -19,7 +19,7 @@ class MainViewModel : BaseViewModel() {
 
     fun loadData() {
         loadOnUI({
-            val param = Params()
+            val param = HttpParams()
             param.put("ui", "50172")
             param.put("pi", "1")
             //这里实际上返回了结果

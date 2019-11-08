@@ -6,9 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
+import com.kingja.loadsir.core.LoadService
+import com.kingja.loadsir.core.LoadSir
+import com.sdxxtop.base.load.IPreLoad
+import com.sdxxtop.common.dialog.LoadingDialog
+import me.yokeyword.fragmentation.SupportFragment
 
 /**
  * Email: sdxxtop@163.com
@@ -16,12 +21,13 @@ import androidx.lifecycle.ViewModelProviders
  * Version: 1.0
  * Description:
  */
-abstract class BaseFragment<DB : ViewDataBinding, VM : ViewModel> : Fragment(), IVMView<VM> {
+abstract class BaseFragment<DB : ViewDataBinding, VM : BaseViewModel> : SupportFragment(), IVMView<VM>, IPreLoad, View.OnClickListener {
     companion object {
         const val TAG = "BaseFragment"
     }
 
     lateinit var mBinding: DB
+    lateinit var mLoadService: LoadService<Any>
 
     val mViewModel: VM by lazy {
         ViewModelProviders.of(this@BaseFragment)[vmClazz()]
@@ -30,12 +36,31 @@ abstract class BaseFragment<DB : ViewDataBinding, VM : ViewModel> : Fragment(), 
 //        ViewModelProviders.of(this@BaseActivity)[getVmClass()]
     }
 
+    val mLoadingDialog by lazy {
+        LoadingDialog(activity)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         mBinding = DataBindingUtil.inflate<DB>(inflater, layoutId(), container, false)
         mBinding.lifecycleOwner = this
+        val loadSirBindView = loadSirBindView()
+        if (loadSirBindView == null) {
+            mLoadService = LoadSir.getDefault().register(mBinding.root) {
+                preLoad()
+            }
+            return mLoadService.loadLayout
+        } else {
+            //自定义的一个加载界面
+            mLoadService = LoadSir.getDefault().register(loadSirBindView) {
+                preLoad()
+            }
+            return mBinding.root
+        }
+    }
 
-        return mBinding.root
+    open fun loadSirBindView(): View? {
+        return null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,12 +70,23 @@ abstract class BaseFragment<DB : ViewDataBinding, VM : ViewModel> : Fragment(), 
         mBinding.executePendingBindings()
 
         initView()
+        initSelfObserve()
         initObserve()
         initEvent()
         initData()
     }
 
-    override fun bindVM() {
+    private fun initSelfObserve() {
+        mViewModel.mIsLoadingShow.observe(this, Observer {
+            if (it) {
+                mLoadingDialog.show()
+            } else {
+                mLoadingDialog.dismiss()
+            }
+        })
+    }
+
+    override fun preLoad() {
     }
 
     override fun initEvent() {
@@ -62,6 +98,9 @@ abstract class BaseFragment<DB : ViewDataBinding, VM : ViewModel> : Fragment(), 
     override fun onResume() {
         super.onResume()
         loadData()
+    }
+
+    override fun onClick(v: View) {
     }
 
     override fun onDestroy() {

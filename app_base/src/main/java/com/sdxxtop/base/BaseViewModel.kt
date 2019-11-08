@@ -1,12 +1,18 @@
 package com.sdxxtop.base
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sdxxtop.network.helper.data.BaseResponse
+import com.sdxxtop.network.helper.exception.ApiException
 import com.sdxxtop.network.load.ILoadData
 import com.sdxxtop.network.load.LoadDataImpl
 import kotlinx.coroutines.CoroutineScope
+import java.lang.Exception
 
 /**
  * Email: sdxxtop@163.com
@@ -15,7 +21,8 @@ import kotlinx.coroutines.CoroutineScope
  * Description:
  */
 abstract class BaseViewModel : ViewModel() {
-    val mThrowable = MutableLiveData<Throwable>()
+    val mIsLoadingShow = MutableLiveData(false)
+    val mThrowable = MutableLiveData<ApiException>()
     //抽取了LoadData
     private val loadData: ILoadData = LoadDataImpl(BaseApplication.INSTANCE, viewModelScope)
 
@@ -25,7 +32,7 @@ abstract class BaseViewModel : ViewModel() {
                           failBlock: (code: Int, msg: String, t: Throwable) -> Unit,
                           catchBack: suspend CoroutineScope.(t: Throwable) -> Unit = {},
                           finallyBack: suspend CoroutineScope.() -> Unit = {}) {
-        loadData.loadCatchOnUI(block, successBlock, failBlock, catchBack, finallyBack)
+        loadData.loadCatchOnUI(block, successBlock, failBlock, catchBack, finallyBack, mThrowable)
     }
 
 
@@ -34,7 +41,7 @@ abstract class BaseViewModel : ViewModel() {
             //空实现带参方法
                      failBlock: (code: Int, msg: String, t: Throwable) -> Unit = { code, msg, t -> },
                      finallyBack: suspend CoroutineScope.() -> Unit = {}) {
-        loadData.loadOnUI(block, successBlock, failBlock, finallyBack)
+        loadData.loadOnUI(block, successBlock, failBlock, finallyBack, mThrowable)
     }
 
 
@@ -42,6 +49,45 @@ abstract class BaseViewModel : ViewModel() {
                          successBlock: (BaseResponse<T>) -> Unit,
                          failBlock: (code: Int, msg: String, t: Throwable) -> Unit,
                          finallyBack: suspend CoroutineScope.() -> Unit = {}) {
-        loadData.loadBaseOnUI(block, successBlock, failBlock, finallyBack)
+        loadData.loadBaseOnUI(block, successBlock, failBlock, finallyBack, mThrowable)
+    }
+
+    fun startActivity(context: Context?, intent: Intent): Boolean {
+        if (context == null) {
+            return false
+        }
+
+        try {
+            if (context !is Activity) {
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            }
+            context.startActivity(intent)
+            return true
+        } catch (e: Exception) {
+
+        }
+        return false
+    }
+
+    fun <T> startActivity(context: Context?, activityClazz: Class<T>): Boolean {
+        if (context == null) {
+            return false
+        }
+
+        try {
+            val intent = Intent(context, activityClazz)
+            if (context !is Activity) {
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            }
+            context.startActivity(intent)
+            return true
+        } catch (e: Exception) {
+
+        }
+        return false
+    }
+
+    fun showLoadingDialog(isShow: Boolean) {
+        mIsLoadingShow.value = isShow
     }
 }

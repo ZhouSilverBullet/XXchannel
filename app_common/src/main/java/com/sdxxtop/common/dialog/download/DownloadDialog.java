@@ -12,9 +12,9 @@ import androidx.annotation.DrawableRes;
 
 import com.luck.picture.lib.permissions.RxPermissions;
 import com.sdxxtop.common.R;
+import com.sdxxtop.common.dialog.download.data.InitData;
 import com.sdxxtop.common.utils.StringUtil;
 import com.sdxxtop.common.utils.UIUtils;
-import com.sdxxtop.xxchannel.model.data.InitData;
 
 import java.io.File;
 import java.util.regex.Matcher;

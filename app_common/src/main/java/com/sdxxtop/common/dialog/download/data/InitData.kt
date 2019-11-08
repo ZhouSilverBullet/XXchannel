@@ -1,4 +1,4 @@
-package com.sdxxtop.xxchannel.model.data
+package com.sdxxtop.common.dialog.download.data
 
 /**
  * Email: zhousaito@163.com

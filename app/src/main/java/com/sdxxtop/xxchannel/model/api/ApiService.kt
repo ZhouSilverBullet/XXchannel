@@ -1,7 +1,7 @@
 package com.sdxxtop.xxchannel.model.api
 
+import com.sdxxtop.common.dialog.download.data.InitData
 import com.sdxxtop.network.helper.data.BaseResponse
-import com.sdxxtop.xxchannel.model.data.InitData
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
