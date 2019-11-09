@@ -3,6 +3,8 @@ package com.sdxxtop.imagora.rtmtutorial;
 import android.content.Context;
 import android.util.Log;
 
+import com.sdxxtop.openlive.activities.presenter.im.RtmCallEventListenerAdapter;
+import com.sdxxtop.sdkagora.AgoraSession;
 import com.sdxxtop.sdkagora.BuildConfig;
 import com.sdxxtop.sdkagora.R;
 
@@ -70,6 +72,10 @@ public class ChatManager {
         // Global option, mainly used to determine whether
         // to support offline messages now.
         mSendMsgOptions = new SendMessageOptions();
+
+        RtmCallEventListenerAdapter rtmCallEventListener = new RtmCallEventListenerAdapter(mContext, mRtmClient);
+        mRtmClient.getRtmCallManager().setEventListener(rtmCallEventListener);
+
     }
 
     public RtmClient getRtmClient() {

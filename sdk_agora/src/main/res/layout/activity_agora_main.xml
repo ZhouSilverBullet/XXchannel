@@ -27,6 +27,37 @@
         android:layout_marginEnd="@dimen/setting_btn_margin_right"
         android:onClick="onSettingClicked"/>
 
+    <Button
+        android:id="@+id/btn_login"
+        android:text="登入"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/btn_logout"
+        android:layout_marginTop="@dimen/setting_btn_margin_top"
+        android:layout_marginRight="@dimen/setting_btn_margin_right"
+        android:layout_marginEnd="@dimen/setting_btn_margin_right"
+        android:onClick="onSettingClicked"/>
+
+    <Button
+        android:id="@+id/btn_call"
+        android:text="呼叫"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_logout"
+        android:layout_marginTop="@dimen/setting_btn_margin_top"
+        android:layout_marginRight="@dimen/setting_btn_margin_right"
+        android:layout_marginEnd="@dimen/setting_btn_margin_right"
+        android:onClick="onSettingClicked"/>
+
+    <EditText
+        android:layout_below="@id/btn_call"
+        android:id="@+id/et_call"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="呼叫者的ID"
+        />
+
     <RelativeLayout
         android:id="@+id/middle_layout"
         android:layout_width="match_parent"

@@ -15,12 +15,10 @@ import android.widget.TextView;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sdxxtop.imagora.adapter.MessageAdapter;
 import com.sdxxtop.imagora.model.MessageBean;
-import com.sdxxtop.imagora.model.MessageListBean;
 import com.sdxxtop.imagora.rtmtutorial.AgoraIMConfig;
 import com.sdxxtop.imagora.rtmtutorial.ChatManager;
 import com.sdxxtop.imagora.utils.MessageUtil;
@@ -357,8 +355,9 @@ public class LiveActivity extends RtcBaseActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        showToast(getString(R.string.join_channel_failed));
-                        finish();
+                        Log.e(TAG, "join channel failed ---> " + errorInfo);
+                        showToast(getString(R.string.join_channel_failed)+ "--" + errorInfo);
+//                        finish();
                     }
                 });
             }
@@ -547,5 +546,43 @@ public class LiveActivity extends RtcBaseActivity {
                 });
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+
+        mRtmChannel.leave(new ResultCallback<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        leaveAndReleaseChannel();
+
+                        mChatManager.unregisterListener(mClientListener);
+
+                        Log.e(TAG, "leave channel success ---> " + aVoid);
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(ErrorInfo errorInfo) {
+                Log.e(TAG, "leave channel failed ---> " + errorInfo);
+            }
+        });
+    }
+
+    /**
+     * API CALL: leave and release channel
+     */
+    private void leaveAndReleaseChannel() {
+        if (mRtmChannel != null) {
+            mRtmChannel.leave(null);
+            mRtmChannel.release();
+            mRtmChannel = null;
+        }
     }
 }

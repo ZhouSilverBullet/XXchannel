@@ -12,11 +12,17 @@ import com.sdxxtop.openlive.AgoraAppLiveConfig;
  * Description:
  */
 public class AgoraSession {
+
+    private static RtmCallEventManager callEventManager;
+
     private static AgoraAppLiveConfig liveConfig;
 
     private static AgoraIMConfig imConfig;
 
     public static void init(Application application) {
+
+        callEventManager = new RtmCallEventManager();
+
         if (liveConfig == null) {
             liveConfig = new AgoraAppLiveConfig();
         }
@@ -38,5 +44,17 @@ public class AgoraSession {
 
     public static AgoraAppLiveConfig getLiveConfig() {
         return liveConfig;
+    }
+
+    public static RtmCallEventManager getCallEventManager() {
+        return callEventManager;
+    }
+
+    public static void addCallback(RtmCallEventCallback rtmCallEventCallback) {
+        getCallEventManager().addCallback(rtmCallEventCallback);
+    }
+
+    public static void removeCallback(RtmCallEventCallback rtmCallEventCallback) {
+        getCallEventManager().removeCallback(rtmCallEventCallback);
     }
 }

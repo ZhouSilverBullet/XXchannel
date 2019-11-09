@@ -32,7 +32,10 @@ import com.sdxxtop.sdkagora.R;
 
 import io.agora.rtc.Constants;
 import io.agora.rtm.ErrorInfo;
+import io.agora.rtm.LocalInvitation;
+import io.agora.rtm.RemoteInvitation;
 import io.agora.rtm.ResultCallback;
+import io.agora.rtm.RtmCallEventListener;
 import io.agora.rtm.RtmClient;
 
 public class MainAgoraActivity extends BaseActivity {
@@ -148,10 +151,98 @@ public class MainAgoraActivity extends BaseActivity {
         mChatManager = AgoraIMConfig.the().getChatManager();
         mRtmClient = mChatManager.getRtmClient();
 
+        mRtmClient.getRtmCallManager().setEventListener(new RtmCallEventListener() {
+            @Override
+            public void onLocalInvitationReceivedByPeer(LocalInvitation localInvitation) {
+                Log.e(TAG, "-------onLocalInvitationReceivedByPeer-------");
+            }
+
+            @Override
+            public void onLocalInvitationAccepted(LocalInvitation localInvitation, String s) {
+                Log.e(TAG, "-------onLocalInvitationAccepted-------");
+            }
+
+            @Override
+            public void onLocalInvitationRefused(LocalInvitation localInvitation, String s) {
+                Log.e(TAG, "-------onLocalInvitationRefused-------");
+            }
+
+            @Override
+            public void onLocalInvitationCanceled(LocalInvitation localInvitation) {
+                Log.e(TAG, "-------onLocalInvitationCanceled-------");
+            }
+
+            @Override
+            public void onLocalInvitationFailure(LocalInvitation localInvitation, int i) {
+                Log.e(TAG, "-------onLocalInvitationFailure-------");
+            }
+
+            @Override
+            public void onRemoteInvitationReceived(final RemoteInvitation remoteInvitation) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        String content = remoteInvitation.getContent();
+                        Toast.makeText(MainAgoraActivity.this, "呼叫来了 onRemoteInvitationReceived 内容：" + content, Toast.LENGTH_SHORT).show();
+
+                        mRtmClient.getRtmCallManager().acceptRemoteInvitation(remoteInvitation, new ResultCallback<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+
+                            }
+
+                            @Override
+                            public void onFailure(ErrorInfo errorInfo) {
+
+                            }
+                        });
+                    }
+                });
+
+                Log.e(TAG, "-------onRemoteInvitationReceived-------");
+            }
+
+            @Override
+            public void onRemoteInvitationAccepted(RemoteInvitation remoteInvitation) {
+                Log.e(TAG, "-------onRemoteInvitationAccepted-------");
+
+            }
+
+            @Override
+            public void onRemoteInvitationRefused(RemoteInvitation remoteInvitation) {
+                Log.e(TAG, "-------onRemoteInvitationRefused-------");
+            }
+
+            @Override
+            public void onRemoteInvitationCanceled(RemoteInvitation remoteInvitation) {
+                Log.e(TAG, "-------onRemoteInvitationCanceled-------");
+            }
+
+            @Override
+            public void onRemoteInvitationFailure(RemoteInvitation remoteInvitation, int i) {
+                Log.e(TAG, "-------onRemoteInvitationFailure`-------");
+            }
+        });
+
         findViewById(R.id.btn_logout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 doLogout();
+            }
+        });
+
+
+        findViewById(R.id.btn_login).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doLogin();
+            }
+        });
+
+        findViewById(R.id.btn_call).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doCall();
             }
         });
     }
@@ -268,8 +359,20 @@ public class MainAgoraActivity extends BaseActivity {
 
     public void gotoRoleActivity() {
 
-        doLogin();
+//        doLogin();
 
+        final String userLogin = etUserLogin.getText().toString();
+
+
+        Intent intent = new Intent(MainAgoraActivity.this, LiveActivity.class);
+        String room = mTopicEdit.getText().toString();
+        //默认是主播
+        intent.putExtra(MessageUtil.INTENT_EXTRA_TARGET_NAME, room);
+        intent.putExtra(MessageUtil.INTENT_EXTRA_USER_ID, userLogin);
+
+        intent.putExtra(com.sdxxtop.openlive.Constants.KEY_CLIENT_ROLE, Constants.CLIENT_ROLE_BROADCASTER);
+        config().setChannelName(room);
+        startActivity(intent);
     }
 
     private void toastNeedPermissions() {
@@ -323,19 +426,21 @@ public class MainAgoraActivity extends BaseActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+
+                        showToast("登出成功！！！");
 //                        Intent intent = new Intent(LoginActivity.this, SelectionActivity.class);
 //                        intent.putExtra(MessageUtil.INTENT_EXTRA_USER_ID, mUserId);
 //                        startActivity(intent);
 
-                        Intent intent = new Intent(MainAgoraActivity.this, LiveActivity.class);
-                        String room = mTopicEdit.getText().toString();
-                        //默认是主播
-                        intent.putExtra(MessageUtil.INTENT_EXTRA_TARGET_NAME, room);
-                        intent.putExtra(MessageUtil.INTENT_EXTRA_USER_ID, userLogin);
-
-                        intent.putExtra(com.sdxxtop.openlive.Constants.KEY_CLIENT_ROLE, Constants.CLIENT_ROLE_BROADCASTER);
-                        config().setChannelName(room);
-                        startActivity(intent);
+//                        Intent intent = new Intent(MainAgoraActivity.this, LiveActivity.class);
+//                        String room = mTopicEdit.getText().toString();
+//                        //默认是主播
+//                        intent.putExtra(MessageUtil.INTENT_EXTRA_TARGET_NAME, room);
+//                        intent.putExtra(MessageUtil.INTENT_EXTRA_USER_ID, userLogin);
+//
+//                        intent.putExtra(com.sdxxtop.openlive.Constants.KEY_CLIENT_ROLE, Constants.CLIENT_ROLE_BROADCASTER);
+//                        config().setChannelName(room);
+//                        startActivity(intent);
                     }
                 });
             }
@@ -369,6 +474,23 @@ public class MainAgoraActivity extends BaseActivity {
     private void doLogout() {
         mRtmClient.logout(null);
         MessageUtil.cleanMessageListBeanList();
+    }
+
+    private void doCall() {
+        EditText etCall = findViewById(R.id.et_call);
+        LocalInvitation localInvitation = mRtmClient.getRtmCallManager().createLocalInvitation(etCall.getText().toString().trim());
+        localInvitation.setContent("我我是造的假数据！！！，我是假的数据，我是假数据 ");
+        mRtmClient.getRtmCallManager().sendLocalInvitation(localInvitation, new ResultCallback<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+
+            }
+
+            @Override
+            public void onFailure(ErrorInfo errorInfo) {
+                Toast.makeText(MainAgoraActivity.this, "呼叫失败" + errorInfo.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }

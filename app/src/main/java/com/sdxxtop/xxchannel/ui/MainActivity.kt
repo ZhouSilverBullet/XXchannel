@@ -15,6 +15,7 @@ import com.sdxxtop.base.lifecycle.ActivityLifecycleImpl
 import com.sdxxtop.common.dialog.download.DownloadDialog
 import com.sdxxtop.crash.test.CrashTestActivity
 import com.sdxxtop.mapsdk.MapTestActivity
+import com.sdxxtop.openlive.activities.AgoraTestActivity
 import com.sdxxtop.openlive.activities.MainAgoraActivity
 import com.sdxxtop.trackerlibrary.test.TrackerTestActivity
 import com.sdxxtop.ui.timerselect.BottomDialogView
@@ -73,7 +74,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun openLive(v: View) {
-        startActivity(Intent(this, MainAgoraActivity::class.java))
+        startActivity(Intent(this, AgoraTestActivity::class.java))
     }
 
     fun openSelectPicture(v: View) {
