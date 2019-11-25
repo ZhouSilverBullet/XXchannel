@@ -15,7 +15,7 @@ public abstract class RtcBaseActivity extends BaseActivity implements EventHandl
         super.onCreate(savedInstanceState);
         registerRtcEventHandler(this);
         configVideo();
-        joinChannel();
+        joinChannel(getToUserId());
     }
 
     private void configVideo() {
@@ -27,10 +27,12 @@ public abstract class RtcBaseActivity extends BaseActivity implements EventHandl
         ));
     }
 
-    private void joinChannel() {
+    public void joinChannel(int userId) {
         // Initialize token, extra info here before joining channel
-        rtcEngine().joinChannel(null, config().getChannelName(), "", 0);
+        rtcEngine().joinChannel(null, config().getChannelName(), "", userId);
     }
+
+    protected abstract int getToUserId();
 
     protected SurfaceView prepareRtcVideo(int uid, boolean local) {
         SurfaceView surface = RtcEngine.CreateRendererView(getApplicationContext());

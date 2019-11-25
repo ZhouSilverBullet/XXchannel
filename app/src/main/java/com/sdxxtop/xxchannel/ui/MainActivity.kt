@@ -15,6 +15,7 @@ import com.sdxxtop.base.lifecycle.ActivityLifecycleImpl
 import com.sdxxtop.common.dialog.download.DownloadDialog
 import com.sdxxtop.crash.test.CrashTestActivity
 import com.sdxxtop.mapsdk.MapTestActivity
+import com.sdxxtop.meau_manager.MenuManagerActivity
 import com.sdxxtop.openlive.activities.AgoraTestActivity
 import com.sdxxtop.openlive.activities.MainAgoraActivity
 import com.sdxxtop.trackerlibrary.test.TrackerTestActivity
@@ -75,6 +76,10 @@ class MainActivity : AppCompatActivity() {
 
     fun openLive(v: View) {
         startActivity(Intent(this, AgoraTestActivity::class.java))
+    }
+
+    fun openMenu(v: View) {
+        startActivity(Intent(this, MenuManagerActivity::class.java))
     }
 
     fun openSelectPicture(v: View) {
