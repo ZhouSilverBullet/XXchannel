@@ -2,6 +2,8 @@ package com.sdxxtop.meau_manager.widget.adapter;
 
 import android.content.Context;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -14,7 +16,6 @@ import com.sdxxtop.meau_manager.R;
 import com.sdxxtop.meau_manager.entity.MenuItemEntry;
 import com.sdxxtop.meau_manager.helper.ItemTouchCallback;
 
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -29,11 +30,13 @@ import java.util.List;
 public class NavAdapter extends CanCloseAdapter<MenuItemEntry, BaseViewHolder> implements ItemTouchCallback.MoveListener {
 
     private final int mItemHeight;
+    private final Animation shake; //抖动动画
 
     public NavAdapter(Context context) {
         super(R.layout.item_menu_recycler);
         int widthPixels = context.getResources().getDisplayMetrics().widthPixels;
         mItemHeight = widthPixels / 4;
+        shake = AnimationUtils.loadAnimation(context, R.anim.item_shake);
     }
 
     @Override
@@ -56,6 +59,12 @@ public class NavAdapter extends CanCloseAdapter<MenuItemEntry, BaseViewHolder> i
         ImageView ivControl = helper.getView(R.id.iv_control);
         handleLlParentAndIvControl(llParent, ivControl, helper.getAdapterPosition(), item);
 
+        View view = helper.getView(R.id.ll_root);
+        if (isCanDelItem() && isEdit) {
+            view.setAnimation(shake);
+        } else {
+            view.clearAnimation();
+        }
 
     }
 

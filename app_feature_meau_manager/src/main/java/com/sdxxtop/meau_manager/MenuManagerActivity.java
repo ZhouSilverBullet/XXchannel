@@ -151,9 +151,9 @@ public class MenuManagerActivity extends AppCompatActivity {
             list.add(new MenuItemEntry());
         }
 
-
         navAdapter = new NavAdapter(this);
         rvNav.setAdapter(navAdapter);
+        navAdapter.setEmptyView(R.layout.nav_empty_view, rvNav);
 
         menuAdapterManager.setNavAdapter(navAdapter);
 
