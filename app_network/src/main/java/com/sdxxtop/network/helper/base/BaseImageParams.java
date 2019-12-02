@@ -93,4 +93,12 @@ public abstract class BaseImageParams extends BaseParams {
         return imgMap;
     }
 
+    private void putNormalData() {
+        imgMap.put("data", RequestBody.create(MediaType.parse("text/plain"), getData()));
+    }
+
+    public HashMap<String, RequestBody> getImgNormalData() {
+        putNormalData();
+        return imgMap;
+    }
 }

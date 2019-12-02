@@ -2,6 +2,7 @@ package com.sdxxtop.xxchannel.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -13,15 +14,20 @@ import com.luck.picture.lib.config.PictureMimeType
 import com.luck.picture.lib.permissions.RxPermissions
 import com.sdxxtop.base.lifecycle.ActivityLifecycleImpl
 import com.sdxxtop.common.dialog.download.DownloadDialog
+import com.sdxxtop.common.showToasty
 import com.sdxxtop.crash.test.CrashTestActivity
 import com.sdxxtop.mapsdk.MapTestActivity
 import com.sdxxtop.meau_manager.MenuManagerActivity
 import com.sdxxtop.openlive.activities.AgoraTestActivity
-import com.sdxxtop.openlive.activities.MainAgoraActivity
 import com.sdxxtop.trackerlibrary.test.TrackerTestActivity
 import com.sdxxtop.ui.timerselect.BottomDialogView
 import com.sdxxtop.xxchannel.R
+import com.sdxxtop.xxchannel.model.api.RetrofitClient
+import com.sdxxtop.xxchannel.model.helper.HttpImageParams
 import com.sdxxtop.xxchannel.ui.login.LoginActivity
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+import java.io.File
 
 class MainActivity : AppCompatActivity() {
     val mainViewModel = MainViewModel()
@@ -87,4 +93,31 @@ class MainActivity : AppCompatActivity() {
                 .compress(true).selectionMode(PictureConfig.SINGLE)
                 .maxSelectNum(1).forResult(10)
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 10 && data != null) {
+            var result = PictureSelector.obtainMultipleResult(data)
+            val compressPath = result[0].compressPath
+            toRequest(compressPath);
+        }
+    }
+
+    private fun toRequest(compressPath: String?) {
+
+        MainScope().launch {
+            try {
+                val params = HttpImageParams()
+//              params.put("imgFile", compressPath)
+                params.put("aa", "11")
+                params.addCompressImagePath("imgFile", File(compressPath), getCacheDir().toString() + "/img.png", 80)
+                var postCarInfo = RetrofitClient.goService.postCarInfo(params.imgNormalData)
+                showToasty("postCarInfo =-> ${postCarInfo.msg}")
+            }catch (e:Exception) {
+                showToasty("e -> $e")
+                Log.e("MainActivity", "$e")
+            }
+        }
+    }
+
 }

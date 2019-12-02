@@ -58,6 +58,17 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+
+
+
+
+    api project(path: ':app_tracker')
+
+
+    api project(path: ':sdk_alipush')
+    api project(path: ':sdk_agora')
+    api project(path: ':app_feature_meau_manager')
     api project(path: ':app_webview')
 
 }

@@ -14,6 +14,10 @@ object RetrofitClient : BaseRetrofitClient() {
         getService(ApiService::class.java, ApiService.BASE_URL)
     }
 
+    val goService by lazy {
+        getService(GoService::class.java, GoService.BASE_URL)
+    }
+
     override fun isDebug(): Boolean {
         return true
     }

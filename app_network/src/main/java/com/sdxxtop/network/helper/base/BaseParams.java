@@ -65,6 +65,11 @@ public abstract class BaseParams implements IDefaultValue {
         return NetUtil.getBase64Data(map, NetworkSession.INSTANCE.getVersion());
     }
 
+    public String getNormalData() {
+        return NetUtil.getNormalData(map, NetworkSession.INSTANCE.getVersion());
+    }
+
+
     public void putDeviceNo() {
         map.put("dn", DeviceUtil.getDeviceNo(context));
     }

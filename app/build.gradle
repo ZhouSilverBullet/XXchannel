@@ -100,16 +100,10 @@ dependencies {
 
 
     implementation project(path: ':app_base')
-    implementation project(path: ':app_common')
     implementation project(path: ':app_ui')
     implementation project(path: ':app_crash')
-    implementation project(path: ':app_tracker')
     implementation project(path: ':sdk_amap')
     implementation project(path: ':sdk_baiduface')
-    implementation project(path: ':sdk_alipush')
-    implementation project(path: ':sdk_agora')
-    implementation project(path: ':app_feature_meau_manager')
-
     //splash直接依赖上
 //    implementation project(path: ':splash')
 
